@@ -1,0 +1,9 @@
+D:\Source\SelfTest\FileSearch\FileSearch\bin\Debug\FileSearch.exe
+D:\Source\SelfTest\FileSearch\FileSearch\bin\Debug\FileSearch.pdb
+D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\FileSearch.Form1.resources
+D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\FileSearch.Properties.Resources.resources
+D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\FileSearch.exe
+D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\FileSearch.pdb
