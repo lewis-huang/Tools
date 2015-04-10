@@ -7,3 +7,11 @@ D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\GenerateResource.read.1.t
 D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\GenerateResource.write.1.tlog
 D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\FileSearch.exe
 D:\Source\SelfTest\FileSearch\FileSearch\obj\x86\Debug\FileSearch.pdb
+D:\selfuse\githubrepo\tool\Tools\FileSearch\obj\x86\Debug\FileSearch.exe
+D:\selfuse\githubrepo\tool\Tools\FileSearch\obj\x86\Debug\FileSearch.pdb
+D:\selfuse\githubrepo\tool\Tools\FileSearch\bin\Debug\FileSearch.exe
+D:\selfuse\githubrepo\tool\Tools\FileSearch\bin\Debug\FileSearch.pdb
+D:\selfuse\githubrepo\tool\Tools\FileSearch\obj\x86\Debug\FileSearch.Properties.Resources.resources
+D:\selfuse\githubrepo\tool\Tools\FileSearch\obj\x86\Debug\FileSearch.csproj.GenerateResource.Cache
+D:\selfuse\githubrepo\tool\Tools\FileSearch\obj\x86\Debug\FileSearch.csprojResolveAssemblyReference.cache
+D:\selfuse\githubrepo\tool\Tools\FileSearch\obj\x86\Debug\FileSearchApp.Form1.resources

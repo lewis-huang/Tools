@@ -1,4 +1,4 @@
-﻿namespace FileSearch
+﻿namespace FileSearchApp
 {
     partial class Form1
     {
@@ -34,9 +34,9 @@
             this.lvFiles = new System.Windows.Forms.ListView();
             this.FullPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dgTargetFiles = new System.Windows.Forms.DataGridView();
+            this.FullPathName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.txtKeyWord = new System.Windows.Forms.TextBox();
-            this.FullPathName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgTargetFiles)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,8 +70,8 @@
             // lvFiles
             // 
             this.lvFiles.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.lvFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.lvFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lvFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.FullPath});
             this.lvFiles.Location = new System.Drawing.Point(14, 107);
@@ -88,16 +88,22 @@
             // 
             // dgTargetFiles
             // 
-            this.dgTargetFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTargetFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTargetFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FullPathName});
             this.dgTargetFiles.Location = new System.Drawing.Point(405, 13);
             this.dgTargetFiles.Name = "dgTargetFiles";
             this.dgTargetFiles.RowTemplate.Height = 23;
-            this.dgTargetFiles.Size = new System.Drawing.Size(1073, 577);
+            this.dgTargetFiles.Size = new System.Drawing.Size(953, 577);
             this.dgTargetFiles.TabIndex = 4;
+            // 
+            // FullPathName
+            // 
+            this.FullPathName.HeaderText = "FullPathName";
+            this.FullPathName.Name = "FullPathName";
+            this.FullPathName.Width = 1000;
             // 
             // label2
             // 
@@ -116,17 +122,11 @@
             this.txtKeyWord.TabIndex = 6;
             this.txtKeyWord.Text = "txtKeyWord";
             // 
-            // FullPathName
-            // 
-            this.FullPathName.HeaderText = "FullPathName";
-            this.FullPathName.Name = "FullPathName";
-            this.FullPathName.Width = 1000;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1490, 602);
+            this.ClientSize = new System.Drawing.Size(1370, 602);
             this.Controls.Add(this.txtKeyWord);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgTargetFiles);
