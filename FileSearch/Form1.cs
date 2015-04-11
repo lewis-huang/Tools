@@ -13,6 +13,7 @@ using System.Threading;
 
 namespace FileSearchApp
 {
+    public delegate void FileCollect(FileDelegation file);
     public partial class Form1 : Form
     {
         #region global variables set
@@ -23,17 +24,14 @@ namespace FileSearchApp
         FileSystemx targetfs;
 
         #endregion global variables set
-
         public Form1()
         {
             InitializeComponent();
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
-
         private void cmdSearch_Click(object sender, EventArgs e)
         {
             #region clear control items
@@ -46,65 +44,39 @@ namespace FileSearchApp
                 dgTargetFiles.Rows.Clear();
             }
             #endregion clear control items
-            sKeyword = txtKeyWord.Text;
-     
+            sKeyword = txtKeyWord.Text;     
             sFolder = txtFolder.Text;
             targetfs = new FileSystemx(sFolder);
             FileSearch myfilesearch = new FileSearch(targetfs, sKeyword);
-
+            myfilesearch.myFileCollector = myfilesearch.myFileCollector + new FileCollect(GUI_Refresh);
             #region perform file search by key word
             Task filesearchTask = new Task(myfilesearch.getFittedFiles, new object());
-            filesearchTask.Start();
-            Int32 totalfilecount = targetfs.CurrentFilesCount;
-            Int32 searchedfilecount = targetfs.SearchedFiles.Count;
-            Int32 fittedfilecount = targetfs.FittedFiles.Count;
-
-            while (filesearchTask.Status == TaskStatus.Running)
+            filesearchTask.Start();         
+            #endregion         
+        }
+        public void GUI_Refresh(FileDelegation file)
+        {
+            if (file.Belonging == "SearchedCollection")
             {
-
-              
-                    if (lvFiles.Items.Count != 0)
-                    {
-                        lvFiles.Items.Clear();
-                    }
-
-                    if (dgTargetFiles.Rows.Count != 0)
-                    {
-                        dgTargetFiles.Rows.Clear();
-                    }
-
-                    for (Int32 searchfileindex = 0; searchfileindex < searchedfilecount; searchfileindex++)
-                    {
-                        lvFiles.Items.Add(targetfs.SearchedFiles[searchfileindex].FullName.ToString());
-                    }
-
-
-                    for (Int32 fittedfileindex = 0; fittedfileindex < fittedfilecount; fittedfileindex++)
-                    {
-                        dgTargetFiles.Rows.Add(targetfs.FittedFiles[fittedfileindex].FullName.ToString());
-                    }
-                    this.Refresh();
-                    Thread.Sleep(1000);
-                    
-                totalfilecount = targetfs.CurrentFilesCount;
-                searchedfilecount = targetfs.SearchedFiles.Count;
-                fittedfilecount = targetfs.FittedFiles.Count;
+                lvFiles.Items.Add(file.FullName.ToString());
+                labFileSearched.Text = file.FullName.ToString();
             }
-            #endregion 
-            MessageBox.Show(" search completed!");
-         
-        }        
-         
+            if (file.Belonging == "FittedCollection")
+            {
+                dgTargetFiles.Rows.Add(file.FullName.ToString());
+            }
+        }
     }   
-
     public class FileSearch
     {
         private FileSystemx _targetfs;
         private string _keyword;
+        public FileCollect myFileCollector;
         public FileSearch(FileSystemx targetfs, string keyword)
         {
             _targetfs = targetfs;
             _keyword = keyword;
+            myFileCollector = new FileCollect(collectFiles);
         }
         public void getRecuriveFilesByBackgroupThread(object state)
         {
@@ -139,8 +111,8 @@ namespace FileSearchApp
             {
                 #region method refined to iteratively apply regular expression on the target file
                 using (StreamReader tmpSr = new StreamReader(_targetfs.FolderFilesTarget[initfileindex].FullName))
-                {
-                    _targetfs.SearchedFiles.Add(new FileInfo(_targetfs.FolderFilesTarget[initfileindex].FullName.ToString()));
+                {                   
+                    myFileCollector(new FileDelegation(_targetfs.FolderFilesTarget[initfileindex].FullName.ToString(),"SearchedCollection"));
                     if (new FileInfo(_targetfs.FolderFilesTarget[initfileindex].FullName).Length > 100 * 1024 * 1024)
                     {
                         #region file size bigger than 100MB
@@ -148,8 +120,7 @@ namespace FileSearchApp
                         {
                             if (Regex.IsMatch(tmpSr.ReadLine(), _keyword, RegexOptions.IgnoreCase) && searchcontinueflag == "1")
                             {
-                                //dgTargetFiles.Rows.Add(targetfs.FolderFilesTarget[initfileindex].FullName);
-                                _targetfs.FittedFiles.Add(new FileInfo(_targetfs.FolderFilesTarget[initfileindex].FullName.ToString()));
+                                myFileCollector(new FileDelegation(_targetfs.FolderFilesTarget[initfileindex].FullName.ToString(), "FittedCollection"));
                                 searchcontinueflag = "0";
                             }
                         }
@@ -159,9 +130,7 @@ namespace FileSearchApp
                     {
                         if (Regex.IsMatch(tmpSr.ReadToEnd(), _keyword, RegexOptions.IgnoreCase))
                         {
-                            // dgTargetFiles.Rows.Add(targetfs.FolderFilesTarget[initfileindex].FullName);
-                            _targetfs.FittedFiles.Add(new FileInfo(_targetfs.FolderFilesTarget[initfileindex].FullName.ToString()));
-                            //searchcontinueflag = "0";
+                            myFileCollector(new FileDelegation(_targetfs.FolderFilesTarget[initfileindex].FullName.ToString(), "FittedCollection"));                           
                         }
                     }
 
@@ -169,6 +138,17 @@ namespace FileSearchApp
                 #endregion method refined to iteratively apply regular expression on the target file
                 initfileindex = initfileindex + 1;
                 searchcontinueflag = "1";
+            }
+        }
+        public void collectFiles(FileDelegation file)
+        {
+            if (file.Belonging == "SearchedCollection")
+            {
+                _targetfs.SearchedFiles.Add(new FileInfo(file.FullName.ToString()));
+            }
+            if (file.Belonging == "FittedCollection")
+            {
+                _targetfs.FittedFiles.Add(new FileInfo(file.FullName.ToString()));
             }
         }
     }
@@ -194,5 +174,16 @@ namespace FileSearchApp
         public List<FileInfo> FittedFiles { get { return _fittedFiles; } set { _fittedFiles = value; } }
 
     }
-
+    public class FileDelegation
+    {
+        private string _fullname;
+        private string _belonging;
+        public FileDelegation(string FullName, string Belonging)
+        {
+            _fullname = FullName;
+            _belonging = Belonging;
+        }
+        public string FullName { get { return _fullname; } }
+        public string Belonging { get { return _belonging; } }
+    }
 }

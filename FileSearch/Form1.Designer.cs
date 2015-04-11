@@ -37,6 +37,7 @@
             this.FullPathName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.txtKeyWord = new System.Windows.Forms.TextBox();
+            this.labFileSearched = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgTargetFiles)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,7 +77,7 @@
             this.FullPath});
             this.lvFiles.Location = new System.Drawing.Point(14, 107);
             this.lvFiles.Name = "lvFiles";
-            this.lvFiles.Size = new System.Drawing.Size(374, 483);
+            this.lvFiles.Size = new System.Drawing.Size(374, 462);
             this.lvFiles.TabIndex = 3;
             this.lvFiles.UseCompatibleStateImageBehavior = false;
             this.lvFiles.View = System.Windows.Forms.View.Details;
@@ -96,7 +97,7 @@
             this.dgTargetFiles.Location = new System.Drawing.Point(405, 13);
             this.dgTargetFiles.Name = "dgTargetFiles";
             this.dgTargetFiles.RowTemplate.Height = 23;
-            this.dgTargetFiles.Size = new System.Drawing.Size(953, 577);
+            this.dgTargetFiles.Size = new System.Drawing.Size(953, 556);
             this.dgTargetFiles.TabIndex = 4;
             // 
             // FullPathName
@@ -122,11 +123,23 @@
             this.txtKeyWord.TabIndex = 6;
             this.txtKeyWord.Text = "txtKeyWord";
             // 
+            // labFileSearched
+            // 
+            this.labFileSearched.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labFileSearched.AutoSize = true;
+            this.labFileSearched.Location = new System.Drawing.Point(12, 581);
+            this.labFileSearched.Name = "labFileSearched";
+            this.labFileSearched.Size = new System.Drawing.Size(125, 12);
+            this.labFileSearched.TabIndex = 7;
+            this.labFileSearched.Text = "FileAlreadySearched:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 602);
+            this.Controls.Add(this.labFileSearched);
             this.Controls.Add(this.txtKeyWord);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgTargetFiles);
@@ -154,6 +167,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtKeyWord;
         private System.Windows.Forms.DataGridViewTextBoxColumn FullPathName;
+        private System.Windows.Forms.Label labFileSearched;
     }
 }
 
